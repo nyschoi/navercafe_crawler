@@ -133,10 +133,11 @@ def subscribe():
 @app.route('/oauth')  # 코드 받기
 def oauth():
     REST_API_KEY = app.config['REST_API_KEY']
+    SERVER_ENV = app.config['SERVER_ENV']
     try:
         code = str(request.args.get('code'))
-        resToken = getAccessToken(
-            REST_API_KEY, str(code))  # RESET API KEY값을 사용
+        resToken = getAccessToken(SERVER_ENV,
+                                  REST_API_KEY, str(code))  # RESET API KEY값을 사용
         user_info = json.loads(getUserInfo(resToken['access_token']))
         text_output = 'code=' + str(code) + '<p>res Token=' + str(resToken)
         text_output += '<p>access_token=' + resToken[

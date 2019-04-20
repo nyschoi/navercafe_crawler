@@ -47,16 +47,23 @@ def sendMessageTemplate(access_token, userid, clubid, menuid, content_type):
     return result_code
 
 
-def getAccessToken(clientId, code):
+def getAccessToken(SERVER_ENV, clientId, code):
     """[summary]
     사용자 토큰 받기:
     code를 이용하여 실제로 API를 호출할 수 있는 사용자 토큰(Access Token, Refresh Token)을 받아 옴
     Returns:
         [type] -- [dict]
     """
+    # XXX
     url = "https://kauth.kakao.com/oauth/token"
+    if SERVER_ENV == 'DEV':
+        redirect_url = 'http://localhost:5000/'
+    else:
+        redirect_url = 'http://ec2-54-180-166-6.ap-northeast-2.compute.amazonaws.com:5000/'
     payload = "grant_type=authorization_code&client_id=" + clientId + \
-        "&redirect_url=http%3A%2F%2Flocalhost%3A5000%2Foauth&code=" + code
+        "&redirect_url=" + redirect_url + "oauth&code=" + code
+    # payload = "grant_type=authorization_code&client_id=" + clientId + \
+    #     "&redirect_url=http%3A%2F%2Flocalhost%3A5000%2Foauth&code=" + code
     # payload = "grant_type=authorization_code&client_id=" + clientId + "&redirect_url=http://ec2-54-180-166-6.ap-northeast-2.compute.amazonaws.com:5000/oauth&code=" + code
     headers = {
         'Content-Type': "application/x-www-form-urlencoded",
@@ -93,7 +100,6 @@ def getUserInfo(access_token):
     Returns:
         [type] -- [dict]
     """
-    # url = 'https://kapi.kakao.com/v1/user/signup'
     headers = {
         'Content-Type': "application/x-www-form-urlencoded",
         'Cache-Control': "no-cache",
@@ -106,7 +112,6 @@ def getUserInfo(access_token):
 
 def build_payload(userid, clubid, menuid, content_type):
     """content_type(조회/댓글순)으로 최신 파일을 읽어 카톡메시지 헤더/바디 구성)
-
     Arguments:
         userid {int} -- userid
         clubid {int} -- clubid
@@ -116,12 +121,12 @@ def build_payload(userid, clubid, menuid, content_type):
         [dict] -- [카톡 메시지 헤더/바디]
     """
     if content_type == 'ByView':
-        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid)
-                                  + '-' + str(menuid) + '-views-*')
+        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid) +
+                                  '-' + str(menuid) + '-views-*')
         latest_file = max(list_of_files, key=os.path.getctime)
     else:  # ByReply
-        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid)
-                                  + '-' + str(menuid) + '-reply-*')
+        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid) +
+                                  '-' + str(menuid) + '-reply-*')
         latest_file = max(list_of_files, key=os.path.getctime)
     print(f'latest file {content_type} : {latest_file}')
     with open(latest_file, 'r') as fout:
