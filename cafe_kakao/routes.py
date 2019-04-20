@@ -6,7 +6,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from cafe_kakao import app, db, bcrypt
 from cafe_kakao.models import User, Post
 from cafe_kakao.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
-from cafe_kakao.kakaohandler import getAccessToken, getUserInfo
+from cafe_kakao.utils.kakao_util import getAccessToken, getUserInfo
 # @app.route('/')
 # def index():
 #     if app.config['SERVER_ENV'] == 'PROD':

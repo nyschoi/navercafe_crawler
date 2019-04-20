@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from collections import OrderedDict
-from cafe_kakao.analyze_by_page_no import build_dict
-from cafe_kakao.sortpost import OrderedPosts
-from cafe_kakao.dumpoutput import dump_output
+from cafe_kakao.utils.crawl_util import build_dict, OrderedPosts
+from cafe_kakao.utils.file_util import dump_output
 
 
 def crawl_n_make_file(**kwargs):

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from cafe_kakao import REST_API_KEY
-from cafe_kakao.make_file import crawl_n_make_file
-from cafe_kakao.kakaohandler import send_kakaotalk
 from cafe_kakao.models import Post
-
+from cafe_kakao.utils.make_file import crawl_n_make_file
+from cafe_kakao.utils.kakao_util import send_kakaotalk
+from cafe_kakao.utils.file_util import remove_crawl_data
 
 for item in Post.query.all():
     userid = item.author.kakaoid
@@ -23,3 +23,6 @@ for item in Post.query.all():
         menuid=menuid,
         refresh_token=refresh_token,
         rest_api_key=REST_API_KEY)
+
+
+remove_crawl_data('./data')

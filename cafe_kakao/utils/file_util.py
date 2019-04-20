@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 import json
+import os
 
 
 def dump_output(userid, clubid, menuid, post_dict, post_orderby_view,
@@ -26,3 +27,12 @@ def dump_output(userid, clubid, menuid, post_dict, post_orderby_view,
         menuid) + '-' + 'reply-' + now + '.json'
     with open(file_name, 'w') as f:
         json.dump(post_orderby_reply, f, ensure_ascii=False)
+
+
+def remove_crawl_data(file_path):
+    if os.path.exists(file_path):
+        for file in os.scandir(file_path):
+            os.remove(file.path)
+        return 'Rmove all file'
+    else:
+        return 'directory not found'
