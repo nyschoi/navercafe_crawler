@@ -2,17 +2,15 @@
 
 네이버 카페 탑 조회/댓글 리스팅
 
-## kakao talk 실행 법
+### AWS
 
-1. python -m flask run
-2. refresh token확인
-3. sendkakaotalk에 refresh token갱신해서 python으로 실행
 
 ## TODO List
 
 ### WEB
 
 - [ ] oauth시 반환값으로 자동으로 registration form으로 던질 수 있도록 해보자
+- [ ] dev/prod환경에서 url을 좀 더 깔끔하게 처리할 수 없을까?
 
 ### 크롤링
 
