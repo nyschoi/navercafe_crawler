@@ -25,4 +25,4 @@ for item in Post.query.all():
         rest_api_key=REST_API_KEY)
 
 
-remove_crawl_data('./data')
+remove_crawl_data('./crawl_data')

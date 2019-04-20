@@ -116,11 +116,11 @@ def build_payload(userid, clubid, menuid, content_type):
         [dict] -- [카톡 메시지 헤더/바디]
     """
     if content_type == 'ByView':
-        list_of_files = glob.glob('./data/' + str(userid) + '-' + str(clubid)
+        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid)
                                   + '-' + str(menuid) + '-views-*')
         latest_file = max(list_of_files, key=os.path.getctime)
     else:  # ByReply
-        list_of_files = glob.glob('./data/' + str(userid) + '-' + str(clubid)
+        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid)
                                   + '-' + str(menuid) + '-reply-*')
         latest_file = max(list_of_files, key=os.path.getctime)
     print(f'latest file {content_type} : {latest_file}')
