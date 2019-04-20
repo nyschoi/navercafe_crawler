@@ -3,7 +3,7 @@
 네이버 카페 탑 조회/댓글 리스팅
 
 ### AWS
-
+- config.ini, sitedb복사(scp)
 
 ## TODO List
 
