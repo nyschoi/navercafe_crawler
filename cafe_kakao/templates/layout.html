@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<link rel="apple-touch-icon" sizes="57x57" href="{{url_for('static', filename='apple-icon-57x57.png') }}">
+<link rel="apple-touch-icon" sizes="60x60" href="{{url_for('static', filename='apple-icon-60x60.png') }}">
+<link rel="apple-touch-icon" sizes="72x72" href="{{url_for('static', filename='apple-icon-72x72.png') }}">
+<link rel="apple-touch-icon" sizes="76x76" href="{{url_for('static', filename='apple-icon-76x76.png') }}">
+<link rel="apple-touch-icon" sizes="114x114" href="{{url_for('static', filename='apple-icon-114x114.png') }}">
+<link rel="apple-touch-icon" sizes="120x120" href="{{url_for('static', filename='apple-icon-120x120.png') }}">
+<link rel="apple-touch-icon" sizes="144x144" href="{{url_for('static', filename='apple-icon-144x144.png') }}">
+<link rel="apple-touch-icon" sizes="152x152" href="{{url_for('static', filename='apple-icon-152x152.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='apple-icon-180x180.png') }}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{url_for('static', filename='android-icon-192x192.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="96x96" href="{{url_for('static', filename='favicon-96x96.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='favicon-16x16.png') }}">
+<link rel="manifest" href="{{url_for('static', filename='manifest.json')}}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
 
 <head>
   <!-- Required meta tags -->
@@ -31,12 +49,13 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="{{ url_for('home') }}">홈</a>
+            <a class="nav-item nav-link" href="{{ url_for('subscribe') }}">이용동의하기(kakao token)</a>
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
             {% if current_user.is_authenticated %}
             <a class="nav-item nav-link" href="{{ url_for('new_post') }}">즐겨찾기 추가</a>
-            <a class="nav-item nav-link" href="{{ url_for('account') }}">계정</a>
+            <a class="nav-item nav-link" href="{{ url_for('account') }}">{{ current_user.username }} 계정 관리</a>
             <a class="nav-item nav-link" href="{{ url_for('logout') }}">로그아웃</a>
             {% else %}
             <a class="nav-item nav-link" href="{{ url_for('login') }}">로그인</a>

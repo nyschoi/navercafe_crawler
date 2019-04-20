@@ -2,15 +2,17 @@
 
 네이버 카페 탑 조회/댓글 리스팅
 
-### AWS
-- config.ini, sitedb복사(scp)
 
 ## TODO List
+### AWS
+- [x] config.ini
+- [x] sitedb복사(scp)
+- [x] crontab 조정
 
 ### WEB
-
+- [x] 404가 더럽히니 favicon만들어주자 https://www.favicon-generator.org
 - [ ] oauth시 반환값으로 자동으로 registration form으로 던질 수 있도록 해보자
-- [ ] dev/prod환경에서 url을 좀 더 깔끔하게 처리할 수 없을까?
+- [x] dev/prod환경에서 url을 깔끔히 정리
 
 ### 크롤링
 

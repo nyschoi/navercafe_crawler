@@ -3,7 +3,9 @@
 {% for post in posts %}
 <article class="media content-section">
   <div class="media-body">
-    <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.description }}</a></h2>
+    <h2>
+      <a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.description }}</a>
+    </h2>
     <p class="article-content">카페id: {{ post.clubid }}</p>
     <p class="article-content">게시판id: {{ post.menuid }}</p>
     <div class="article-metadata">

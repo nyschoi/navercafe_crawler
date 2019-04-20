@@ -1,17 +1,10 @@
 import json
-import os
-import secrets
 from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from cafe_kakao import app, db, bcrypt
 from cafe_kakao.models import User, Post
 from cafe_kakao.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from cafe_kakao.utils.kakao_util import getAccessToken, getUserInfo
-# @app.route('/')
-# def index():
-#     if app.config['SERVER_ENV'] == 'PROD':
-#         return render_template('index_prod.html')
-#     return render_template('index_dev.html')
 
 
 @app.route("/")
@@ -75,30 +68,12 @@ def account():
         form.kakaoid.data = current_user.kakaoid
     return render_template('account.html', title='Account', form=form)
 
-# @app.route("/register", methods=['GET', 'POST'])
-# def register():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('home'))
-#     form = RegistrationForm()
-#     if form.validate_on_submit():
-#         hashed_password = bcrypt.generate_password_hash(
-#             form.password.data).decode('utf-8')
-#         user = User(username=form.username.data,
-#                     kakaoid=form.kakaoid.data, password=hashed_password)
-#         db.session.add(user)
-#         db.session.commit()
-#         flash('Your account has been created! You are now able to log in', 'success')
-#         return redirect(url_for('login'))
-#     return render_template('register.html', title='Register', form=form)
-
 
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        # post = Post(title=form.title.data,
-        #             content=form.content.data, author=current_user)
         post = Post(clubid=form.clubid.data, menuid=form.menuid.data,
                     description=form.description.data, author=current_user)
         db.session.add(post)
@@ -150,23 +125,24 @@ def delete_post(post_id):
 
 
 @app.route('/subscribe')
-def index():
-    if app.config['SERVER_ENV'] == 'PROD':
-        return render_template('index_prod.html')
-    return render_template('index_dev.html')
+def subscribe():
+    server_url = app.config['SERVER_URL']
+    return render_template('subscribe.html', server_url=server_url)
 
 
 @app.route('/oauth')  # 코드 받기
 def oauth():
-    # config = configparser.ConfigParser()  # XXX 이렇게 안하면 debug실행 시 못 읽어들인다
-    # config.read('./config.ini')
     REST_API_KEY = app.config['REST_API_KEY']
-    code = str(request.args.get('code'))
-    resToken = getAccessToken(REST_API_KEY, str(code))  # RESET API KEY값을 사용
-    user_info = json.loads(getUserInfo(resToken['access_token']))
-    text_output = 'code=' + str(code) + '<p>res Token=' + str(resToken)
-    text_output += '<p>access_token=' + resToken[
-        'access_token'] + '<p>refresh token=' + resToken['refresh_token']
-    text_output += '<p>nickname=' + user_info['properties'][
-        'nickname'] + '<p>id=' + str(user_info['id'])
+    try:
+        code = str(request.args.get('code'))
+        resToken = getAccessToken(
+            REST_API_KEY, str(code))  # RESET API KEY값을 사용
+        user_info = json.loads(getUserInfo(resToken['access_token']))
+        text_output = 'code=' + str(code) + '<p>res Token=' + str(resToken)
+        text_output += '<p>access_token=' + resToken[
+            'access_token'] + '<p>refresh token=' + resToken['refresh_token']
+        text_output += '<p>nickname=' + user_info['properties'][
+            'nickname'] + '<p>id=' + str(user_info['id'])
+    except Exception as e:
+        text_output = '에러...(새로고침하지말고 back버튼 누르세영)' + str(e)
     return text_output
