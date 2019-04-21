@@ -3,7 +3,6 @@
 <article class="media content-section">
   <div class="media-body">
     <div class="article-metadata">
-      <!-- <a class="mr-2" href="#">{{ post.author.username }}</a> -->
       <small class="text-muted">{{ post.author.username }}</small>
       <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
       {% if post.author == current_user %}
@@ -12,9 +11,15 @@
         <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal"
           data-target="#deleteModal">Delete</button>
       </div>
+      {% else %}
+      <div>
+        <h4 class="article-title">본인 즐겨찾기가 아니라 딱히 보여줄게 없어요</h2>
+      </div>
       {% endif %}
     </div>
     <h2 class="article-title">{{ post.description }}</h2>
+    <p class="article-content">카페 ID: {{ post.clubid }}</p>
+    <p class="article-content">게시판 ID: {{ post.menuid }}</p>
     <!-- <p class="article-content">{{ post.content }}</p> -->
   </div>
 </article>

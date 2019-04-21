@@ -8,6 +8,7 @@
 - [x] config.ini
 - [x] sitedb복사(scp)
 - [x] crontab 조정
+- [ ] AWS에선 refresh token안되는 이유 찾아보기
 
 ### WEB
 - [x] 404가 더럽히니 favicon만들어주자 https://www.favicon-generator.org

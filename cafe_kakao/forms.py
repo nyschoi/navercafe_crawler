@@ -14,7 +14,6 @@ class RegistrationForm(FlaskForm):
                                validators=[DataRequired(), Length(max=100)])
     refresh_token = StringField('refresh_token',
                                 validators=[DataRequired(), Length(max=100)])
-
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
@@ -27,19 +26,15 @@ class RegistrationForm(FlaskForm):
                 '이미 가입한 카카오ID임. 오타가 아닌지?')
 
 
-class LoginForm(FlaskForm):
-    kakaoid = StringField('카카오id',
-                          validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
-
-
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
     kakaoid = StringField('카카오id',
                           validators=[DataRequired()])
+    access_token = StringField('access_token',
+                               validators=[DataRequired(), Length(max=100)])
+    refresh_token = StringField('refresh_token',
+                                validators=[DataRequired(), Length(max=100)])
     submit = SubmitField('Update')
 
     def validate_kakaoid(self, kakaoid):
@@ -48,6 +43,14 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError(
                     '이미 가입한 카카오ID임. 오타가 아닌지?')
+
+
+class LoginForm(FlaskForm):
+    kakaoid = StringField('카카오id',
+                          validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
 
 
 class PostForm(FlaskForm):

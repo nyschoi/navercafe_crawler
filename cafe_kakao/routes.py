@@ -133,7 +133,6 @@ def subscribe():
 @app.route('/oauth')  # 코드 받기
 def oauth():
     REST_API_KEY = app.config['REST_API_KEY']
-    SERVER_ENV = app.config['SERVER_ENV']
     try:
         code = str(request.args.get('code'))
         resToken = getAccessToken(app.config['REDIRECT_URL'],
