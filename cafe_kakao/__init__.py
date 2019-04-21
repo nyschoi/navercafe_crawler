@@ -17,8 +17,10 @@ app.config['REST_API_KEY'] = config['SECRET']['REST_API_KEY']
 app.config['SERVER_ENV'] = config['DEFAULT']['SERVER_ENV']
 if app.config['SERVER_ENV'] == 'DEV':
     app.config['SERVER_URL'] = config['DEFAULT']['DEV_URL']
+    app.config['REDIRECT_URL'] = config['DEFAULT']['DEV_REDIRECT']
 else:
     app.config['SERVER_URL'] = config['DEFAULT']['PROD_URL']
+    app.config['REDIRECT_URL'] = config['DEFAULT']['PROD_REDIRECT']
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)

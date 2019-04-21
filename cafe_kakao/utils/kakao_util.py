@@ -47,19 +47,15 @@ def sendMessageTemplate(access_token, userid, clubid, menuid, content_type):
     return result_code
 
 
-def getAccessToken(SERVER_ENV, clientId, code):
+def getAccessToken(redirect_url, clientId, code):
     """[summary]
     사용자 토큰 받기:
     code를 이용하여 실제로 API를 호출할 수 있는 사용자 토큰(Access Token, Refresh Token)을 받아 옴
     Returns:
         [type] -- [dict]
     """
-    # XXX
     url = "https://kauth.kakao.com/oauth/token"
-    if SERVER_ENV == 'DEV':
-        redirect_url = 'http://localhost:5000/'
-    else:
-        redirect_url = 'http://ec2-54-180-166-6.ap-northeast-2.compute.amazonaws.com:5000/'
+    print('REDIRECT URL=', redirect_url)
     payload = "grant_type=authorization_code&client_id=" + clientId + \
         "&redirect_url=" + redirect_url + "oauth&code=" + code
     # payload = "grant_type=authorization_code&client_id=" + clientId + \

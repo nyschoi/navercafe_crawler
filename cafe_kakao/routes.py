@@ -136,7 +136,7 @@ def oauth():
     SERVER_ENV = app.config['SERVER_ENV']
     try:
         code = str(request.args.get('code'))
-        resToken = getAccessToken(SERVER_ENV,
+        resToken = getAccessToken(app.config['REDIRECT_URL'],
                                   REST_API_KEY, str(code))  # RESET API KEY값을 사용
         user_info = json.loads(getUserInfo(resToken['access_token']))
         text_output = 'code=' + str(code) + '<p>res Token=' + str(resToken)
