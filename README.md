@@ -2,7 +2,6 @@
 
 네이버 카페 탑 조회/댓글 리스팅
 
-
 ## TODO List
 ### AWS
 - [x] config.ini

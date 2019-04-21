@@ -60,12 +60,16 @@ def account():
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.kakaoid = form.kakaoid.data
+        current_user.refresh_token = form.refresh_token.data
+        current_user.access_token = form.access_token.data
         db.session.commit()
         flash('Your account has been updated!', 'success')
         return redirect(url_for('account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.kakaoid.data = current_user.kakaoid
+        form.refresh_token.data = current_user.refresh_token
+        form.access_token.data = current_user.access_token
     return render_template('account.html', title='Account', form=form)
 
 

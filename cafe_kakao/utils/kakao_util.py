@@ -50,17 +50,14 @@ def sendMessageTemplate(access_token, userid, clubid, menuid, content_type):
 def getAccessToken(redirect_url, clientId, code):
     """[summary]
     사용자 토큰 받기:
-    code를 이용하여 실제로 API를 호출할 수 있는 사용자 토큰(Access Token, Refresh Token)을 받아 옴
+    code로 API를 호출할 수 있는 사용자 토큰(Access Token, Refresh Token)을 받아 옴
     Returns:
         [type] -- [dict]
     """
     url = "https://kauth.kakao.com/oauth/token"
-    print('REDIRECT URL=', redirect_url)
     payload = "grant_type=authorization_code&client_id=" + clientId + \
-        "&redirect_url=" + redirect_url + "oauth&code=" + code
-    # payload = "grant_type=authorization_code&client_id=" + clientId + \
-    #     "&redirect_url=http%3A%2F%2Flocalhost%3A5000%2Foauth&code=" + code
-    # payload = "grant_type=authorization_code&client_id=" + clientId + "&redirect_url=http://ec2-54-180-166-6.ap-northeast-2.compute.amazonaws.com:5000/oauth&code=" + code
+        "&redirect_url=" + redirect_url + "oauth&code=" + \
+        code  # payload = "grant_type=authorization_code&client_id=" + clientId + "&redirect_url=http://ec2-54-180-166-6.ap-northeast-2.compute.amazonaws.com:5000/oauth&code=" + code
     headers = {
         'Content-Type': "application/x-www-form-urlencoded",
         'Cache-Control': "no-cache",
@@ -117,12 +114,12 @@ def build_payload(userid, clubid, menuid, content_type):
         [dict] -- [카톡 메시지 헤더/바디]
     """
     if content_type == 'ByView':
-        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid) +
-                                  '-' + str(menuid) + '-views-*')
+        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid)
+                                  + '-' + str(menuid) + '-views-*')
         latest_file = max(list_of_files, key=os.path.getctime)
     else:  # ByReply
-        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid) +
-                                  '-' + str(menuid) + '-reply-*')
+        list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid)
+                                  + '-' + str(menuid) + '-reply-*')
         latest_file = max(list_of_files, key=os.path.getctime)
     print(f'latest file {content_type} : {latest_file}')
     with open(latest_file, 'r') as fout:

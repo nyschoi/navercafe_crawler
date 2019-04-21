@@ -18,10 +18,12 @@ def build_dict(post_dict, **kwargs):
     # 'https://m.cafe.naver.com/ArticleAllListAjax.nhn' 못생긴 페이지가 나옴
     # https://m.cafe.naver.com/ArticleList.nhn  페이지1로만 간다?
     base_url = 'https://m.cafe.naver.com/ArticleList.nhn'
-    if not 'menuid' in kwargs:
+    if 'menuid' not in kwargs:
         kwargs['menuid'] = None
     if kwargs['today']:
-        day_b4_yesterday = (date.today() - timedelta(2)).strftime('%y.%m.%d')
+        # day_b4_yesterday = (date.today() - timedelta(2)).strftime('%y.%m.%d')
+        day_b4_yesterday = (date.today() - timedelta(1)
+                            ).strftime('%y.%m.%d')  # 어제일자까지만 뽑자 괜히 길기만 하다
     params = {
         'search.clubid': kwargs['clubid'],
         'search.menuid': kwargs['menuid'],
