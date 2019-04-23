@@ -5,6 +5,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from cafe_kakao.utils import log_util
 
 config = configparser.ConfigParser()
 config.read('./config.ini')
@@ -27,4 +28,5 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
+
 from cafe_kakao import routes  # 위치 바꾸지 마라

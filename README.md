@@ -1,18 +1,17 @@
 # navercafecrawling
-
 네이버 카페 탑 조회/댓글 리스팅
-
 ## TODO List
 ### AWS
 - [x] config.ini
 - [x] sitedb복사(scp)
 - [x] crontab 조정
 - [ ] AWS에선 refresh token안되는 이유 찾아보기
+- logs, crawl_data directory 생성
 
 ### WEB
 - [x] 404가 더럽히니 favicon만들어주자 https://www.favicon-generator.org
 - [ ] oauth시 반환값으로 자동으로 registration form으로 던질 수 있도록 해보자
-- [x] dev/prod환경에서 url을 깔끔히 정리
+- [x] dev/prod환경에서 url을 정리
 
 ### 크롤링
 - [ ] getAccessToken url손으로 고치는 것 수정하자config로되도록

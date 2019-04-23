@@ -4,20 +4,25 @@ import os
 import json
 from collections import OrderedDict
 import requests
+from cafe_kakao.utils.log_util import app_log
 
 
 def send_kakaotalk(**kwargs):
     response = getAccessTokenByRefreshToken(kwargs['rest_api_key'],
                                             kwargs['refresh_token'])
-    print('getAccessTokenByRefreshToken result', response)
-    print(
-        'send kaTalk result(ByView) =',
-        sendMessageTemplate(response['access_token'], kwargs['userid'],
-                            kwargs['clubid'], kwargs['menuid'], 'ByView'))
-    print(
-        'send kaTalk result(ByReply) =',
-        sendMessageTemplate(response['access_token'], kwargs['userid'],
-                            kwargs['clubid'], kwargs['menuid'], 'ByReply'))
+    app_log.info('getAccessToken result:%s', response)
+    app_log.info('katalk result(byView):%s', sendMessageTemplate(
+        response['access_token'], kwargs['userid'], kwargs['clubid'], kwargs['menuid'], 'ByView'))
+    app_log.info('katalk result(byReply):%s', sendMessageTemplate(
+        response['access_token'], kwargs['userid'], kwargs['clubid'], kwargs['menuid'], 'ByReply'))
+    # print(
+    #     'send kaTalk result(ByView) =',
+    #     sendMessageTemplate(response['access_token'], kwargs['userid'],
+    #                         kwargs['clubid'], kwargs['menuid'], 'ByView'))
+    # print(
+    #     'send kaTalk result(ByReply) =',
+    #     sendMessageTemplate(response['access_token'], kwargs['userid'],
+    #                         kwargs['clubid'], kwargs['menuid'], 'ByReply'))
 
 
 def sendMessageTemplate(access_token, userid, clubid, menuid, content_type):
@@ -121,7 +126,7 @@ def build_payload(userid, clubid, menuid, content_type):
         list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid)
                                   + '-' + str(menuid) + '-reply-*')
         latest_file = max(list_of_files, key=os.path.getctime)
-    print(f'latest file {content_type} : {latest_file}')
+    # print(f'latest file {content_type} : {latest_file}')
     with open(latest_file, 'r') as fout:
         datasource = json.load(fout)
     message = OrderedDict()

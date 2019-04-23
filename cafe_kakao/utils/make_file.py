@@ -2,6 +2,7 @@
 from collections import OrderedDict
 from cafe_kakao.utils.crawl_util import build_dict, OrderedPosts
 from cafe_kakao.utils.file_util import dump_output
+from cafe_kakao.utils.log_util import app_log
 
 
 def crawl_n_make_file(**kwargs):
@@ -17,8 +18,10 @@ def crawl_n_make_file(**kwargs):
             pageno=i,
             dict=post_dict,
             today=kwargs['today'])
-        print('stop reason', stop_reason, 'total posts', len(post_dict),
-              'new posts', no_new_post)
+        # print('stop reason', stop_reason, 'total posts', len(post_dict),
+        #       'new posts', no_new_post)
+        app_log.info('stop reason: %d, total posts %d, new posts %d',
+                     stop_reason, len(post_dict), no_new_post)
         i += 1
         if stop_reason != 0:
             break

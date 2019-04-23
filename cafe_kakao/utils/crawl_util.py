@@ -2,6 +2,7 @@
 from datetime import date, timedelta
 import requests
 from bs4 import BeautifulSoup
+from cafe_kakao.utils.log_util import app_log
 
 
 def build_dict(post_dict, **kwargs):
@@ -30,11 +31,12 @@ def build_dict(post_dict, **kwargs):
         'search.page': kwargs['pageno'],
     }
     response = requests.get(base_url, params=params)
-    print('Analyzing...:', response.request.url)
+    # print('Analyzing...:', response.request.url)
+    app_log.info('Progress:%s', response.request.url)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
-    cafe_name = soup.select('header h1')[0].find('a')[
-        'href']  # found !!!! '/biketravelers'
+    cafe_name = soup.select('header h1')[0].find(
+        'a')['href']  # found !!!! '/biketravelers'
     no_of_newly_collected = 0
     for tag in soup.select('.list_area li'):
         try:

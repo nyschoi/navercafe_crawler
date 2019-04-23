@@ -142,7 +142,8 @@ def oauth():
         resToken = getAccessToken(app.config['REDIRECT_URL'],
                                   REST_API_KEY, str(code))  # RESET API KEY값을 사용
         user_info = json.loads(getUserInfo(resToken['access_token']))
-        text_output = 'code=' + str(code) + '<p>res Token=' + str(resToken)
+        text_output = "못 생겼다고 에러 페이지는 아니다"
+        text_output += 'code=' + str(code) + '<p>res Token=' + str(resToken)
         text_output += '<p>access_token=' + resToken[
             'access_token'] + '<p>refresh token=' + resToken['refresh_token']
         text_output += '<p>nickname=' + user_info['properties'][
