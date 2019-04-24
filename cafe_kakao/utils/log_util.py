@@ -47,4 +47,6 @@ def Logger(name):
     return logger
 
 
+logger = Logger(__name__)
+logger.info('info 입니다')
 app_log = Logger("")

@@ -5,24 +5,25 @@ import json
 from collections import OrderedDict
 import requests
 from cafe_kakao.utils.log_util import app_log
+from cafe_kakao.models import User
 
 
 def send_kakaotalk(**kwargs):
-    response = getAccessTokenByRefreshToken(kwargs['rest_api_key'],
-                                            kwargs['refresh_token'])
-    app_log.info('getAccessToken result:%s', response)
+    response = getAccessTokenByRefreshToken(
+        kwargs['rest_api_key'], kwargs['refresh_token'])
+    try:
+        if response['refresh_token']:
+            app_log.info("XXX [%s]'s refresh_token renew: %s -> %s", kwargs['userid'], User.query.filter_by(
+                kakaoid=kwargs['userid']).first().refresh_token, response['refresh_token'])
+            User.query.filter_by(kakaoid=kwargs['userid']).first(
+            ).refresh_token = response['refresh_token']
+    except Exception as e:
+        pass
+    app_log.info("[%s] getAccessToken result:%s", kwargs['userid'], response)
     app_log.info('katalk result(byView):%s', sendMessageTemplate(
         response['access_token'], kwargs['userid'], kwargs['clubid'], kwargs['menuid'], 'ByView'))
     app_log.info('katalk result(byReply):%s', sendMessageTemplate(
         response['access_token'], kwargs['userid'], kwargs['clubid'], kwargs['menuid'], 'ByReply'))
-    # print(
-    #     'send kaTalk result(ByView) =',
-    #     sendMessageTemplate(response['access_token'], kwargs['userid'],
-    #                         kwargs['clubid'], kwargs['menuid'], 'ByView'))
-    # print(
-    #     'send kaTalk result(ByReply) =',
-    #     sendMessageTemplate(response['access_token'], kwargs['userid'],
-    #                         kwargs['clubid'], kwargs['menuid'], 'ByReply'))
 
 
 def sendMessageTemplate(access_token, userid, clubid, menuid, content_type):
