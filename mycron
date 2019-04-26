@@ -2,4 +2,5 @@
 SHELL=/usr/local/bin/zsh
 PATH=/anaconda3/bin:/anaconda3/condabin:/Users/cys/.jenv/shims:/anaconda3/bin:/Users/cys/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 PYTHONPATH=/anaconda3/lib/python3.7/site-packages
-15 8 * * * cd /Users/cys/Documents/dev/navercafe_crawler && python crawl.py >> ./logs/test.sh.log 2>&1
+#15 8 * * * cd /Users/cys/Documents/dev/navercafe_crawler && python crawl.py >> ./logs/test.sh.log 2>&1
+15 8 * * * cd /Users/cys/Documents/dev/navercafe_crawler && python crawl.py

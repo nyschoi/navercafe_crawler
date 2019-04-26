@@ -4,8 +4,9 @@ import os
 import json
 from collections import OrderedDict
 import requests
-from cafe_kakao.utils.log_util import app_log
 from cafe_kakao.models import User
+from cafe_kakao.utils import log_util
+log = log_util.Logger(__name__)
 
 
 def send_kakaotalk(**kwargs):
@@ -13,16 +14,16 @@ def send_kakaotalk(**kwargs):
         kwargs['rest_api_key'], kwargs['refresh_token'])
     try:
         if response['refresh_token']:
-            app_log.info("XXX [%s]'s refresh_token renew: %s -> %s", kwargs['userid'], User.query.filter_by(
+            log.info("XXX [%s]'s refresh_token renew: %s -> %s", kwargs['userid'], User.query.filter_by(
                 kakaoid=kwargs['userid']).first().refresh_token, response['refresh_token'])
             User.query.filter_by(kakaoid=kwargs['userid']).first(
             ).refresh_token = response['refresh_token']
     except Exception as e:
         pass
-    app_log.info("[%s] getAccessToken result:%s", kwargs['userid'], response)
-    app_log.info('katalk result(byView):%s', sendMessageTemplate(
+    log.info("[%s] getAccessToken result:%s", kwargs['userid'], response)
+    log.info('katalk result(byView):%s', sendMessageTemplate(
         response['access_token'], kwargs['userid'], kwargs['clubid'], kwargs['menuid'], 'ByView'))
-    app_log.info('katalk result(byReply):%s', sendMessageTemplate(
+    log.info('katalk result(byReply):%s', sendMessageTemplate(
         response['access_token'], kwargs['userid'], kwargs['clubid'], kwargs['menuid'], 'ByReply'))
 
 
@@ -127,7 +128,7 @@ def build_payload(userid, clubid, menuid, content_type):
         list_of_files = glob.glob('./crawl_data/' + str(userid) + '-' + str(clubid)
                                   + '-' + str(menuid) + '-reply-*')
         latest_file = max(list_of_files, key=os.path.getctime)
-    # print(f'latest file {content_type} : {latest_file}')
+    # log.info("latest file %s : %s", content_type, latest_file)
     with open(latest_file, 'r') as fout:
         datasource = json.load(fout)
     message = OrderedDict()

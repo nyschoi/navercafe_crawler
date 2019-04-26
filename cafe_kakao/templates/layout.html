@@ -49,7 +49,7 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="{{ url_for('home') }}">홈</a>
-            <a class="nav-item nav-link" href="{{ url_for('subscribe') }}">이용동의하기(kakao token)</a>
+
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
@@ -59,7 +59,8 @@
             <a class="nav-item nav-link" href="{{ url_for('logout') }}">로그아웃</a>
             {% else %}
             <a class="nav-item nav-link" href="{{ url_for('login') }}">로그인</a>
-            <a class="nav-item nav-link" href="{{ url_for('register') }}">사용자 등록</a>
+            <!-- <a class="nav-item nav-link" href="{{ url_for('register') }}">사용자 등록</a> -->
+            <a class="nav-item nav-link" href="{{ url_for('subscribe') }}">사용자등록</a>
             {% endif %}
           </div>
           <div>

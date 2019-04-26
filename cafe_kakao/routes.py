@@ -6,6 +6,10 @@ from cafe_kakao.models import User, Post
 from cafe_kakao.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from cafe_kakao.utils.kakao_util import getAccessToken, getUserInfo
 
+from cafe_kakao.utils import log_util
+log_util.LogSetting.FILENAME = "./logs/app.log"
+log = log_util.Logger(__name__)
+
 
 @app.route("/")
 @app.route("/home")
@@ -14,21 +18,10 @@ def home():
     return render_template('home.html', posts=posts)
 
 
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(
-            form.password.data).decode('utf-8')
-        user = User(username=form.username.data,
-                    kakaoid=form.kakaoid.data, password=hashed_password, refresh_token=form.refresh_token.data, access_token=form.access_token.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('Your account has been created! You are now able to log in', 'success')
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+@app.route('/subscribe')
+def subscribe():
+    server_url = app.config['SERVER_URL']
+    return render_template('subscribe.html', server_url=server_url)
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -37,13 +30,13 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(kakaoid=form.kakaoid.data).first()
+        user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
-            flash('Login Unsuccessful. Please check 카카오id and password', 'danger')
+            flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
 
@@ -57,20 +50,63 @@ def logout():
 @login_required
 def account():
     form = UpdateAccountForm()
+    if request.method == 'POST':  # XXX
+        log.error("UpdateAccountForm POST %s", form.validate())
+
     if form.validate_on_submit():
         current_user.username = form.username.data
-        current_user.kakaoid = form.kakaoid.data
-        current_user.refresh_token = form.refresh_token.data
-        current_user.access_token = form.access_token.data
+        current_user.email = form.email.data
         db.session.commit()
         flash('Your account has been updated!', 'success')
         return redirect(url_for('account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
-        form.kakaoid.data = current_user.kakaoid
-        form.refresh_token.data = current_user.refresh_token
-        form.access_token.data = current_user.access_token
+        form.email.data = current_user.email
     return render_template('account.html', title='Account', form=form)
+
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        log.error("validate_on_submit")
+        hashed_password = bcrypt.generate_password_hash(
+            form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, kakaoid=form.kakaoid.data,
+                    password=hashed_password, refresh_token=form.refresh_token.data, access_token=form.access_token.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been created! You are now able to log in', 'success')
+        return redirect(url_for('login'))
+    elif request.method == 'GET':
+        log.error("GET")
+        form.username.data = request.args.get('username')
+        form.kakaoid.data = request.args.get('kakaoid')
+        form.refresh_token.data = request.args.get('refresh_token')
+        form.access_token.data = request.args.get('access_token')
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route('/oauth')  # 코드 받기
+def oauth():
+    REST_API_KEY = app.config['REST_API_KEY']
+    try:
+        code = str(request.args.get('code'))
+        resToken = getAccessToken(app.config['REDIRECT_URL'],
+                                  REST_API_KEY, str(code))  # RESET API KEY값을 사용
+        user_info = json.loads(getUserInfo(resToken['access_token']))
+        text_output = 'code=' + str(code) + '<p>res Token=' + str(resToken)
+        text_output += '<p>access_token=' + resToken[
+            'access_token'] + '<p>refresh token=' + resToken['refresh_token']
+        text_output += '<p>nickname=' + user_info['properties'][
+            'nickname'] + '<p>id=' + str(user_info['id'])
+    except Exception as e:
+        text_output = '에러...(새로고침하지말고 back버튼 누르세영)' + str(e)
+    # return text_output
+    log.info("oauth result:%s", text_output)
+    return redirect(url_for('register', username=user_info['properties']['nickname'], kakaoid=user_info['id'], refresh_token=resToken['refresh_token'], access_token=resToken['access_token']))
 
 
 @app.route("/post/new", methods=['GET', 'POST'])
@@ -126,28 +162,3 @@ def delete_post(post_id):
     db.session.commit()
     flash('삭제완료!', 'success')
     return redirect(url_for('home'))
-
-
-@app.route('/subscribe')
-def subscribe():
-    server_url = app.config['SERVER_URL']
-    return render_template('subscribe.html', server_url=server_url)
-
-
-@app.route('/oauth')  # 코드 받기
-def oauth():
-    REST_API_KEY = app.config['REST_API_KEY']
-    try:
-        code = str(request.args.get('code'))
-        resToken = getAccessToken(app.config['REDIRECT_URL'],
-                                  REST_API_KEY, str(code))  # RESET API KEY값을 사용
-        user_info = json.loads(getUserInfo(resToken['access_token']))
-        text_output = "못 생겼다고 에러 페이지는 아니다"
-        text_output += 'code=' + str(code) + '<p>res Token=' + str(resToken)
-        text_output += '<p>access_token=' + resToken[
-            'access_token'] + '<p>refresh token=' + resToken['refresh_token']
-        text_output += '<p>nickname=' + user_info['properties'][
-            'nickname'] + '<p>id=' + str(user_info['id'])
-    except Exception as e:
-        text_output = '에러...(새로고침하지말고 back버튼 누르세영)' + str(e)
-    return text_output

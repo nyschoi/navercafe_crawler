@@ -10,6 +10,7 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
     kakaoid = db.Column(db.String(20), unique=True, nullable=False)
     username = db.Column(db.String(20), nullable=False)
     access_token = db.Column(db.String(100))
@@ -18,7 +19,7 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', backref='author', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.kakaoid}', '{self.username}', '{self.access_token}', '{self.refresh_token}')"
+        return f"User('{self.email}', '{self.username}')"
 
 
 class Post(db.Model):

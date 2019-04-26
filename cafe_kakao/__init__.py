@@ -5,7 +5,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from cafe_kakao.utils import log_util
 
 config = configparser.ConfigParser()
 config.read('./config.ini')

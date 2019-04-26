@@ -4,8 +4,7 @@ import logging.handlers
 
 class LogSetting():
     """로거 세팅 클래스
-        ::
-            LogSetting.LEVEL = logging.INFO # INFO 이상만 로그를 작성
+        LogSetting.LEVEL = logging.INFO # INFO 이상만 로그를 작성
     """
     LEVEL = logging.INFO
     # LEVEL = logging.DEBUG
@@ -47,6 +46,9 @@ def Logger(name):
     return logger
 
 
-logger = Logger(__name__)
-logger.info('info 입니다')
-app_log = Logger("")
+if __name__ == "__main__":
+    # from cafe_kakao.utils import log_util
+    # log_util.LogSetting.FILENAME = "./logs/test.log"
+    # log = log_util.Logger(__name__)
+    # log.info("OMGthis is %s", __name__)
+    pass

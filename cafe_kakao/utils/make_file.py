@@ -2,15 +2,16 @@
 from collections import OrderedDict
 from cafe_kakao.utils.crawl_util import build_dict, OrderedPosts
 from cafe_kakao.utils.file_util import dump_output
-from cafe_kakao.utils.log_util import app_log
+from cafe_kakao.utils import log_util
+
+log = log_util.Logger(__name__)
 
 
 def crawl_n_make_file(**kwargs):
-    print()
     post_dict = OrderedDict()
     i = 1
     while True:
-        # XXX menuid없을때 exception발생원인 확인 필요
+        # TODO menuid없을때 exception발생원인 확인 필요
         (stop_reason, no_new_post, post_dict) = build_dict(
             post_dict,
             clubid=kwargs['clubid'],
@@ -18,10 +19,8 @@ def crawl_n_make_file(**kwargs):
             pageno=i,
             dict=post_dict,
             today=kwargs['today'])
-        # print('stop reason', stop_reason, 'total posts', len(post_dict),
-        #       'new posts', no_new_post)
-        app_log.info('stop reason: %d, total posts %d, new posts %d',
-                     stop_reason, len(post_dict), no_new_post)
+        log.info('stop reason: %d, total posts %d, new posts %d',
+                 stop_reason, len(post_dict), no_new_post)
         i += 1
         if stop_reason != 0:
             break

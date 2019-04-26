@@ -1,13 +1,15 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, EqualTo, ValidationError, Email
 from cafe_kakao.models import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username',
-                           validators=[DataRequired(), Length(min=2, max=20)])
+    username = StringField('Username', validators=[
+                           DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
     kakaoid = StringField('카카오ID',
                           validators=[DataRequired(), Length(min=2, max=20)])
     access_token = StringField('access_token',
@@ -19,35 +21,42 @@ class RegistrationForm(FlaskForm):
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('가입하기')
 
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError(
+                'That username is taken. Please choose a different one.')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(
+                'That email is taken. Please choose a different one.')
+
     def validate_kakaoid(self, kakaoid):
         user = User.query.filter_by(kakaoid=kakaoid.data).first()
         if user:
             raise ValidationError(
-                '이미 가입한 카카오ID임. 오타가 아닌지?')
+                'That kakaoid is taken. Please choose a different one.')
 
 
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
-    kakaoid = StringField('카카오id',
-                          validators=[DataRequired()])
-    access_token = StringField('access_token',
-                               validators=[DataRequired(), Length(max=100)])
-    refresh_token = StringField('refresh_token',
-                                validators=[DataRequired(), Length(max=100)])
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
     submit = SubmitField('Update')
 
-    def validate_kakaoid(self, kakaoid):
-        if kakaoid.data != current_user.kakaoid:
-            user = User.query.filter_by(kakaoid=kakaoid.data).first()
+    def validate_email(self, email):
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError(
-                    '이미 가입한 카카오ID임. 오타가 아닌지?')
+                    'That email is taken. Please choose a different one.')
 
 
 class LoginForm(FlaskForm):
-    kakaoid = StringField('카카오id',
-                          validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')

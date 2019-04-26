@@ -3,8 +3,8 @@
 <div class="content-section">
     <div class="media">
         <div class="media-body">
-            <h2 class="account-heading">당신의 이름: {{ current_user.username }}</h2>
-            <p class="text-secondary">카카오ID: {{ current_user.kakaoid }}</p>
+            <h2 class="account-heading">{{ current_user.username }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
         </div>
     </div>
     <form method="POST" action="" enctype="multipart/form-data">
@@ -13,6 +13,7 @@
             <legend class="border-bottom mb-4">Account Info</legend>
             <div class="form-group">
                 {{ form.username.label(class="form-control-label") }}
+
                 {% if form.username.errors %}
                 {{ form.username(class="form-control form-control-lg is-invalid") }}
                 <div class="invalid-feedback">
@@ -25,42 +26,16 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                {{ form.kakaoid.label(class="form-control-label") }}
-                {% if form.kakaoid.errors %}
-                {{ form.kakaoid(class="form-control form-control-lg is-invalid") }}
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
                 <div class="invalid-feedback">
-                    {% for error in form.kakaoid.errors %}
+                    {% for error in form.email.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.kakaoid(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.refresh_token.label(class="form-control-label") }}
-                {% if form.refresh_token.errors %}
-                {{ form.refresh_token(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.refresh_token.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.refresh_token(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.access_token.label(class="form-control-label") }}
-                {% if form.access_token.errors %}
-                {{ form.access_token(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.access_token.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.access_token(class="form-control form-control-lg") }}
+                {{ form.email(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
         </fieldset>
