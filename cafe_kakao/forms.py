@@ -6,9 +6,9 @@ from cafe_kakao.models import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[
+    username = StringField('이름', validators=[
                            DataRequired(), Length(min=2, max=20)])
-    email = StringField('Email',
+    email = StringField('Email(나중에 ID로 쓰일)',
                         validators=[DataRequired(), Email()])
     kakaoid = StringField('카카오ID',
                           validators=[DataRequired(), Length(min=2, max=20)])
@@ -30,14 +30,12 @@ class RegistrationForm(FlaskForm):
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
-            raise ValidationError(
-                'That email is taken. Please choose a different one.')
+            raise ValidationError('이미 가입된 email')
 
     def validate_kakaoid(self, kakaoid):
         user = User.query.filter_by(kakaoid=kakaoid.data).first()
         if user:
-            raise ValidationError(
-                'That kakaoid is taken. Please choose a different one.')
+            raise ValidationError('이미 가입된 카카오 계정')
 
 
 class UpdateAccountForm(FlaskForm):
@@ -51,8 +49,7 @@ class UpdateAccountForm(FlaskForm):
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
-                raise ValidationError(
-                    'That email is taken. Please choose a different one.')
+                raise ValidationError('이미 사용중인 이메일')
 
 
 class LoginForm(FlaskForm):
@@ -65,5 +62,5 @@ class LoginForm(FlaskForm):
 class PostForm(FlaskForm):
     clubid = StringField('네이버 카페 ID', validators=[DataRequired()])
     menuid = StringField('카페 게시판 ID', validators=[DataRequired()])
-    description = TextAreaField('설명. 알아듣기 쉽게 쓰자', validators=[DataRequired()])
+    description = TextAreaField('설명(알아듣기 쉽게 쓰자)', validators=[DataRequired()])
     submit = SubmitField('Post')

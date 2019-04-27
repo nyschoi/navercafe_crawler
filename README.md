@@ -3,6 +3,10 @@
 
 ## TODO List
 
+### 회원 관리(귀찮아서 하지 않겠다)
+- [ ] 회원 탈퇴
+- [ ] 아이디, 비밀번호 잊어버렸을때 찾기 기능. email 확인 절차
+- [ ] 이메일 id대신 카카오id 로그인하기
 ### AWS
 - [x] config.ini
 - [x] sitedb복사(scp)
@@ -11,7 +15,7 @@
 
 ### WEB
 - [x] 404가 더럽히니 favicon만들어주자 https://www.favicon-generator.org
-- [ ] oauth시 반환값으로 자동으로 registration form으로 던질 수 있도록 해보자
+- [x] oauth시 반환값으로 자동으로 registration form으로 던질 수 있도록 해보자
 - [x] dev/prod환경에서 url을 정리
 
 ### 크롤링
@@ -23,4 +27,3 @@
 ### 카카오
 - [x] 주소를 xxx.yyy.com/cafe명/[1-9] 이런 형태로 안해주면 카카오톡 링크가 제대로 안걸림. 카톡 문제인지 확인해 보자 -> 누구 문제든 일단 name url을 리턴하는 것으로 바꾸자
 - [x] refresh token handler도 만들자
-

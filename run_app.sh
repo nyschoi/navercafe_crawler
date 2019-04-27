@@ -3,4 +3,4 @@
 # 2>&1 move all the stderr to stdout.
 # and & allows you to run a command/process in background on the current shell.
 # nohup /anaconda3/bin/python ./app.py > ./logs/app_log.txt 2>&1 &
-nohup /anaconda3/bin/python ./app.py > ./logs/flask.txt 2>&1 &
+nohup /home/ubuntu/anaconda3/bin/python ./app.py > /dev/null &
