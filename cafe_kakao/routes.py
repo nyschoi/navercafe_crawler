@@ -2,11 +2,13 @@ import json
 from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from cafe_kakao import app, db, bcrypt
-from cafe_kakao.models import User, Post
-from cafe_kakao.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
+from cafe_kakao.models import User, Post, Youtube
+from cafe_kakao.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, YoutubeForm
 from cafe_kakao.utils.kakao_util import getAccessToken, getUserInfo
 from urllib import parse
 from cafe_kakao.utils import log_util
+from cafe_kakao.utils import youtube_word
+
 log_util.LogSetting.FILENAME = "./logs/app.log"
 log = log_util.Logger(__name__)
 
@@ -164,3 +166,70 @@ def delete_post(post_id):
     db.session.commit()
     flash('삭제완료!', 'success')
     return redirect(url_for('home'))
+
+
+@app.route("/youtube/new", methods=['GET', 'POST'])
+@login_required
+def new_youtube():
+    form = YoutubeForm()
+    if form.validate_on_submit():
+        cmt_file_name, image_file = youtube_word.test(form.youtube_url.data)
+        # log.info("cmt_list, image_file:%s, %s",
+        #          cmt_list, image_file)
+        post = Youtube(title=form.title.data,
+                       youtube_url=form.youtube_url.data, image_file=image_file, author=current_user, comment_file=cmt_file_name)
+        # log.info("new Youtube Post:%s, %s, %s, %s",
+        #          post.title, post.youtube_url, image_file, current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Youtube 댓글 분석 추가됨!', 'success')
+        return redirect(url_for('listyoutube'))
+    return render_template('create_youtube.html', title='분석할 Youtube 정보 입력', form=form, legend='New Youtube')
+
+
+@app.route("/youtube/<int:post_id>")
+def youtube(post_id):
+    post = Youtube.query.get_or_404(post_id)
+    log.info("comment file name: %s", post.comment_file)
+    with open('./cafe_kakao/static/wordcloud/' + post.comment_file, 'r') as f:
+        comments = [line.rstrip('\n') for line in f]
+    return render_template('youtube.html', title=post.title, post=post, comments=comments)
+
+
+@app.route("/youtube/<int:post_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_youtube(post_id):
+    post = Youtube.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = YoutubeForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.youtube_url = form.youtube_url.data
+        db.session.commit()
+        flash('YoutubeForm 업데이트!', 'success')
+        return redirect(url_for('youtube', post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.youtube_url.data = post.youtube_url
+    return render_template('create_youtube.html', title='Update youtube',
+                           form=form, legend='Update youtube')
+
+
+@app.route("/youtube/<int:post_id>/delete", methods=['POST'])
+@login_required
+def delete_youtube(post_id):
+    post = Youtube.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('삭제완료!', 'success')
+    return redirect(url_for('listyoutube'))
+
+
+@app.route("/listyoutube")
+def listyoutube():
+    posts = Youtube.query.all()
+    # log.info("type of posts: %s", type(posts)) # list
+    return render_template('listyoutube.html', posts=posts)

@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     refresh_token = db.Column(db.String(100))
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
+    youtube = db.relationship('Youtube', backref='author', lazy=True)
 
     def __repr__(self):
         return f"User('{self.email}', '{self.username}')"
@@ -33,3 +34,19 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.clubid}', '{self.menuid}', '{self.date_posted}', '{self.description}')"
+
+
+class Youtube(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    youtube_url = db.Column(db.String(3000), nullable=False)
+    image_file = db.Column(db.String(20), nullable=False,
+                           default='default.jpg')
+    comment_file = db.Column(db.String(20), nullable=False,
+                             default='default.jpg')
+    date_posted = db.Column(db.DateTime, nullable=False,
+                            default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.date_posted}', '{self.image_file}')"

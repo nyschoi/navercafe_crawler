@@ -48,13 +48,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link" href="{{ url_for('home') }}">홈</a>
-
+            <a class="nav-item nav-link" href="{{ url_for('home') }}">네이버카페크롤링</a>
+            <a class="nav-item nav-link" href="{{ url_for('listyoutube') }}">Youtube 댓글 분석</a>
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
             {% if current_user.is_authenticated %}
-            <a class="nav-item nav-link" href="{{ url_for('new_post') }}">즐겨찾기 추가</a>
             <a class="nav-item nav-link" href="{{ url_for('account') }}">{{ current_user.username }} 계정 관리</a>
             <a class="nav-item nav-link" href="{{ url_for('logout') }}">로그아웃</a>
             {% else %}
@@ -88,8 +87,15 @@
       <div class="col-md-4">
         <div class="content-section">
           <h3>나중에...</h3>
-          <p class='text-muted'>지금은 넣을 기능이 없다.
+          <p class='text-muted'>생각하자
             <ul class="list-group">
+              {% if current_user.is_authenticated %}
+              <a class="nav-item nav-link list-group-item list-group-item-light"
+                href="{{ url_for('new_post') }}">네이버카페크롤링 추가</a>
+              <a class="nav-item nav-link list-group-item list-group-item-light"
+                href="{{ url_for('new_youtube') }}">Youtube 댓글 분석 추가</a>
+              {% else %}
+              {% endif %}
               <li class="list-group-item list-group-item-light">공지</li>
               <li class="list-group-item list-group-item-light">etc</li>
             </ul>

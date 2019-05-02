@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+{% for post in posts %}
+<article class="media content-section">
+  <div class="media-body">
+    <h2>
+      <a class="article-title" href="{{ url_for('youtube', post_id=post.id) }}">{{ post.title }}</a>
+    </h2>
+    <p class="article-content">youtube_url: {{ post.youtube_url }}</p>
+    <div class="article-metadata">
+      <!-- <a class="mr-2" href="#">{{ post.author.username }}</a> -->
+      <p><small class="text-muted">댓글결과:{{ post.image_file }}</small></p>
+      <p><small class="text-muted">작성자:{{ post.author.username }}</small></p>
+      <p><small class="text-muted">실행일:{{ post.date_posted.strftime('%Y-%m-%d') }}</small></p>
+    </div>
+  </div>
+</article>
+{% endfor %}
+{% endblock content %}

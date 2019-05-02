@@ -64,3 +64,9 @@ class PostForm(FlaskForm):
     menuid = StringField('카페 게시판 ID', validators=[DataRequired()])
     description = TextAreaField('설명(알아듣기 쉽게 쓰자)', validators=[DataRequired()])
     submit = SubmitField('Post')
+
+
+class YoutubeForm(FlaskForm):
+    title = StringField('제목(유튜브 제목이라도 넣어주세요)', validators=[DataRequired()])
+    youtube_url = StringField('유튜브 URL', validators=[DataRequired()])
+    submit = SubmitField('완료')
