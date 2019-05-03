@@ -210,7 +210,7 @@ def test(a):
     # img_file_name = './cafe_kakao/wordcloud/' + 'comment-' + now + '.png'
     cmt_file_name = 'comment-' + now + '.txt'
     img_file_name = 'comment-' + now + '.png'
-    build_wourdcloud(keywords, 'alice_mask.png',
+    build_wourdcloud(keywords, './cafe_kakao/static/alice_mask.png',
                      './cafe_kakao/static/wordcloud/' + img_file_name)
     with open('./cafe_kakao/static/wordcloud/' + cmt_file_name, 'w') as f:
         for item in cmt_list:
