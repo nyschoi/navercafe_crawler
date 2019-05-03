@@ -42,7 +42,6 @@ def register():
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('login'))
     elif request.method == 'GET':
-        log.error("GET")
         form.username.data = request.args.get('username')
         form.kakaoid.data = request.args.get('kakaoid')
         form.refresh_token.data = request.args.get('refresh_token')

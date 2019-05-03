@@ -16,28 +16,6 @@ from cafe_kakao.utils import log_util
 log = log_util.Logger(__name__)
 log.setLevel(logging.DEBUG)
 
-
-def dump_output():
-    """수집된 결과를 파일로 저장한다
-    Arguments:
-    """
-    now = time.strftime('%Y-%m-%d-%H-%M', time.localtime(time.time()))
-    file_name = './crawl_data/' + str(userid) + '-' + str(clubid) + '-' + str(
-        menuid) + '-' + 'raw-' + now + '.json'
-    with open(file_name, 'w') as f:
-        json.dump(post_dict, f, ensure_ascii=False)
-
-    file_name = './crawl_data/' + str(userid) + '-' + str(clubid) + '-' + str(
-        menuid) + '-' + 'views-' + now + '.json'
-    with open(file_name, 'w') as f:
-        json.dump(post_orderby_view, f, ensure_ascii=False)
-
-    file_name = './crawl_data/' + str(userid) + '-' + str(clubid) + '-' + str(
-        menuid) + '-' + 'reply-' + now + '.json'
-    with open(file_name, 'w') as f:
-        json.dump(post_orderby_reply, f, ensure_ascii=False)
-
-
 # -------------------------------------------------------------------
 import json
 import sys
@@ -177,7 +155,7 @@ import numpy as np
 def build_wourdcloud(word_ranking, mask_file, save_file):
     # cys
     # font_path = 'C:/STEM/malgun.ttf'
-    font_path = './AppleGothic.ttf'
+    font_path = './cafe_kakao/static/AppleGothic.ttf'
     # img_mask = np.array(Image.open('C:/STEM/' + mask_file))
     # img_mask = np.array(Image.open('./' + mask_file))
 

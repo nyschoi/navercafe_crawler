@@ -32,3 +32,48 @@
 - [ ] account-img만 먹는 이유가 뭔가?
 - [ ] youtube 에서 \r같은 것을 지워줘야 할 듯. 이상한 데이터가 많음
 - [ ] 작성자는 안나오는가?
+- [ ] https://blog.goodaudience.com/how-to-generate-a-word-cloud-of-any-shape-in-python-7bce27a55f6e
+- [ ] warning처리. qapplication was not...
+- [ ] 127.0.0.1 - - [03/May/2019 22:22:02] "GET /youtube/new HTTP/1.1" 200 -
+2019-05-03 22:22:06,198[INFO|cafe_kakao.utils.youtube_word,211] TTTESTESTSETE:55555
+-------------     KT 초능력 광고    ---------------
+Comments Count = 113
+scan vocabs ... 
+num vocabs = 2116
+done = 10
+WARNING: QApplication was not created in the main() thread.
+2019-05-03 22:22:12.022 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.034 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+2019-05-03 22:22:12.035 python[14977:632315] pid(14977)/euid(501) is calling TIS/TSM in non-main thread environment, ERROR : This is NOT allowed. Please call TIS/TSM in main thread!!!
+127.0.0.1 - - [03/May/2019 22:22:12] "POST /youtube/new HTTP/1.1" 302 -
+127.0.0.1 - - [03/May/2019 22:22:12] "GET /listyoutube HTTP/1.1" 200 -
