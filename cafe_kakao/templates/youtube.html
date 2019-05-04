@@ -20,9 +20,8 @@
         </div>
         <h3 class="article-title">{{ post.title }}</h2>
             <p class="article-content">Youtube URL: {{ post.youtube_url }}</p>
-            <!-- <img class="acc-img"  -->
-            <img class="account-img"
-                src="{{url_for('static', filename='wordcloud/'+post.image_file, width=15, height=3)}}">
+            <!-- <img class="account-img" -->
+            <img class="acc-img" src="{{url_for('static', filename='wordcloud/'+post.image_file, width=15, height=3)}}">
             <p class="article-content">분석된 댓글 내용</p>
             {% for comment in comments %}
             <article class="media content-section">
