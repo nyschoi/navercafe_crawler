@@ -185,22 +185,14 @@ def build_wourdcloud(word_ranking, mask_file, save_file):
 
 # ---------------------------  M a i n ------------------------------
 
-def test(a):
-    log.info('TTTESTESTSETE:%s', a)
+def test(you_urls):
+    log.info('TTTESTESTSETE:%s', you_urls)
     cmt_list.clear()
 
-    print('-------------     KT 초능력 광고    ---------------')
-    # [당신의 초능력 KT 5G] 런칭편
-    get_video_comment('https://www.youtube.com/watch?v=4Gk2-A9lLW0')
-    # [당신의 초능력 KT 5G] 5G 네트워크편
-    get_video_comment('https://www.youtube.com/watch?v=-b6IExXYrNM')
-    # [당신의 초능력 KT 5G] 이런 요금제는 없었다 5G 완전 무제한
-    get_video_comment('https://www.youtube.com/watch?v=W-awGXZPMHM')
-    # [당신의초능력 KT 5G] 갤럭시 S10 5G도 KT에서 (슈퍼체인지)
-    get_video_comment('https://www.youtube.com/watch?v=XSHQTurYYfs')
-    # [당신의 초능력 KT 5G] 직관보다 더 실감나게 야구를 즐기는 초능력?! KT 5G 프로야구 Live
-    get_video_comment('https://www.youtube.com/watch?v=MEOmbGWfw-8')
-
+    url_list = you_urls.split(';')
+    for url in url_list:
+        get_video_comment(url.strip())
+        
     print('Comments Count = ' + str(len(cmt_list)))
     #print(*cmt_list, sep = "\n")
     keywords = rank_word(cmt_list)
@@ -216,19 +208,31 @@ def test(a):
         for item in cmt_list:
             f.write("%s\n" % item)
     return (cmt_file_name, img_file_name)
-    # cmt_list.clear()
 
-##print('-------------    SKT 초시대 광고    ---------------')
-# get_video_comment('https://www.youtube.com/watch?v=72zQZ1uJosk') #[SK텔레콤] 초시대의 초5G 생활_속도 편
-# get_video_comment('https://www.youtube.com/watch?v=yvU0LkgjyII') #[SK텔레콤] 초시대, 생활이 되다_초생활 편
-# get_video_comment('https://www.youtube.com/watch?v=it30hx6d9tg') #[SK텔레콤] 초시대의 초5G생활_소셜VR 편
-# get_video_comment('https://www.youtube.com/watch?v=3NMAECED4T0') #[SK텔레콤] 초시대의 초5G생활_소셜VR 2편
-# get_video_comment('https://www.youtube.com/watch?v=didpsY9Qepg') #[SK텔레콤] 초시대의 응원 생활_빠른중계
-##
-##print('Comments Count = ' + str(len(cmt_list)))
-###print(*cmt_list, sep = "\n")
-##keywords = rank_word(cmt_list)
-##build_wourdcloud(keywords, 'alice_mask.png', 'wc_api_skt.png')
+##    print('-------------     KT 초능력 광고    ---------------')
+##    # [당신의 초능력 KT 5G] 런칭편
+##    get_video_comment('https://www.youtube.com/watch?v=4Gk2-A9lLW0')
+##    # [당신의 초능력 KT 5G] 5G 네트워크편
+##    get_video_comment('https://www.youtube.com/watch?v=-b6IExXYrNM')
+##    # [당신의 초능력 KT 5G] 이런 요금제는 없었다 5G 완전 무제한
+##    get_video_comment('https://www.youtube.com/watch?v=W-awGXZPMHM')
+##    # [당신의초능력 KT 5G] 갤럭시 S10 5G도 KT에서 (슈퍼체인지)
+##    get_video_comment('https://www.youtube.com/watch?v=XSHQTurYYfs')
+##    # [당신의 초능력 KT 5G] 직관보다 더 실감나게 야구를 즐기는 초능력?! KT 5G 프로야구 Live
+##    get_video_comment('https://www.youtube.com/watch?v=MEOmbGWfw-8')
 
 
-print("**** finished ****")
+
+##    cmt_list.clear()
+##    #print('-------------    SKT 초시대 광고    ---------------')
+##    get_video_comment('https://www.youtube.com/watch?v=72zQZ1uJosk') #[SK텔레콤] 초시대의 초5G 생활_속도 편
+##    get_video_comment('https://www.youtube.com/watch?v=yvU0LkgjyII') #[SK텔레콤] 초시대, 생활이 되다_초생활 편
+##    get_video_comment('https://www.youtube.com/watch?v=it30hx6d9tg') #[SK텔레콤] 초시대의 초5G생활_소셜VR 편
+##    get_video_comment('https://www.youtube.com/watch?v=3NMAECED4T0') #[SK텔레콤] 초시대의 초5G생활_소셜VR 2편
+##    get_video_comment('https://www.youtube.com/watch?v=didpsY9Qepg') #[SK텔레콤] 초시대의 응원 생활_빠른중계
+##    
+##    print('Comments Count = ' + str(len(cmt_list)))
+##    print(*cmt_list, sep = "\n")
+##    keywords = rank_word(cmt_list)
+##    build_wourdcloud(keywords, 'alice_mask.png', 'wc_api_skt.png')
+

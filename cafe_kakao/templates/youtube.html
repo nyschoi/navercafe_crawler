@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+
 <article class="media content-section">
     <div class="media-body">
         <div class="article-metadata">
@@ -14,14 +15,17 @@
             </div>
             {% else %}
             <div>
-                <h4 class="article-title">본인 즐겨찾기가 아니라 딱히 보여줄게 없어요</h2>
+                <h4 class="article-title">로그인후 사용하세요</h2>
             </div>
             {% endif %}
         </div>
-        <h3 class="article-title">{{ post.title }}</h2>
+        <div>
+            <h3 class="article-title">{{ post.title }}</h3>
             <p class="article-content">Youtube URL: {{ post.youtube_url }}</p>
             <!-- <img class="account-img" -->
-            <img class="acc-img" src="{{url_for('static', filename='wordcloud/'+post.image_file, width=15, height=3)}}">
+            <div class="wordcloud-wrapper">
+                <img src="{{url_for('static', filename='wordcloud/'+post.image_file, width=15, height=3)}}">
+            </div>
             <p class="article-content">분석된 댓글 내용</p>
             {% for comment in comments %}
             <article class="media content-section">
@@ -34,7 +38,7 @@
                 </div>
             </article>
             {% endfor %}
-            <!-- <p class="article-content">{{ post.content }}</p> -->
+        </div>
     </div>
 </article>
 <!-- Modal -->
