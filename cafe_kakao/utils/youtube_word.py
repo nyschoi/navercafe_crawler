@@ -30,7 +30,7 @@ YOUTUBE_COMMENT_MAX = 100
 GOOGLE_API_KEY = 'AIzaSyDlGT-J97YNlHVDpzR1042Nrfm2tqRNDm0'
 
 
-# cmt_list = []
+cmt_list = []
 
 
 def open_url(url, parms):
