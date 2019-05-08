@@ -44,7 +44,6 @@ def open_url(url, parms):
 
 
 def load_comments(mat):
-    cmt_list = []
     for item in mat["items"]:
         try:
             comment = item["snippet"]["topLevelComment"]
