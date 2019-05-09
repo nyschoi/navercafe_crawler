@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "common.html" %}
 {% block content %}
 <div class="content-section">
     <form method="POST" action="">
@@ -59,7 +59,7 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                {{ form.kakaoid.label(class="form-control-label") }}
+                {{ form.kakaoid.label(class="form-control-label", readonly=true) }}
                 {% if form.kakaoid.errors %}
                 {{ form.kakaoid(class="form-control form-control-lg is-invalid") }}
                 <div class="invalid-feedback">
@@ -68,11 +68,11 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.kakaoid(class="form-control form-control-lg") }}
+                {{ form.kakaoid(class="form-control form-control-lg", readonly=true) }}
                 {% endif %}
             </div>
             <div class="form-group">
-                {{ form.refresh_token.label(class="form-control-label") }}
+                {{ form.refresh_token.label(class="form-control-label", readonly=true) }}
                 {% if form.refresh_token.errors %}
                 {{ form.refresh_token(class="form-control form-control-lg is-invalid") }}
                 <div class="invalid-feedback">
@@ -81,11 +81,11 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.refresh_token(class="form-control form-control-lg") }}
+                {{ form.refresh_token(class="form-control form-control-lg", readonly=trues) }}
                 {% endif %}
             </div>
             <div class="form-group">
-                {{ form.access_token.label(class="form-control-label") }}
+                {{ form.access_token.label(class="form-control-label", readonly=true) }}
                 {% if form.access_token.errors %}
                 {{ form.access_token(class="form-control form-control-lg is-invalid") }}
                 <div class="invalid-feedback">
@@ -94,7 +94,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.access_token(class="form-control form-control-lg") }}
+                {{ form.access_token(class="form-control form-control-lg", readonly=true) }}
                 {% endif %}
             </div>
         </fieldset>
@@ -105,7 +105,26 @@
 </div>
 <div class="border-top pt-3">
     <small class="text-muted">
-        Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+        이미 가입하셨다면 <a class="ml-2" href="{{ url_for('login') }}">로그인하세요</a>
     </small>
 </div>
+<!--==========================
+    Footer
+  ============================-->
+<footer id="footer">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <!--
+                      All the links in the footer should remain intact.
+                      You can delete the links only if you purchased the pro version.
+                      Licensing information: https://bootstrapmade.com/license/
+                      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=BizPage
+                    -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+</footer><!-- #footer -->
 {% endblock content %}

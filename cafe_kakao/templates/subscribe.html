@@ -1,13 +1,31 @@
-{% extends "layout.html" %}
+{% extends "common.html" %}
 {% block content %}
 <article class="media content-section">
     <div class="media-body">
         <div class="article-metadata">
             <a class="article-title" href="{{server_url}}"><img
-                    src="{{ url_for('static', filename='kakao_account_login_btn_medium_narrow.png') }}"></a>
-
+                    src="{{ url_for('static', filename='img/register/kakao_account_login_btn_medium_narrow.png') }}"></a>
         </div>
         <!-- 언젠가는 kakao의 token을 자동으로 계정추가에 넣어주도록 하자 -->
     </div>
 </article>
+<!--==========================
+    Footer
+  ============================-->
+<footer id="footer">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <!--
+                      All the links in the footer should remain intact.
+                      You can delete the links only if you purchased the pro version.
+                      Licensing information: https://bootstrapmade.com/license/
+                      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=BizPage
+                    -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+</footer><!-- #footer -->
 {% endblock content %}

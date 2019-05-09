@@ -14,6 +14,12 @@ log = log_util.Logger(__name__)
 
 
 @app.route("/")
+@app.route("/index")
+def index():
+    posts = Post.query.all()
+    return render_template('index.html', posts=posts)
+
+
 @app.route("/home")
 def home():
     posts = Post.query.all()
@@ -29,7 +35,7 @@ def subscribe():
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         log.error("validate_on_submit")
@@ -39,7 +45,7 @@ def register():
                     password=hashed_password, refresh_token=form.refresh_token.data, access_token=form.access_token.data)
         db.session.add(user)
         db.session.commit()
-        flash('Your account has been created! You are now able to log in', 'success')
+        flash('가입이 완료되었습니다. 이제 로그인할 수 있습니다.', 'success')
         return redirect(url_for('login'))
     elif request.method == 'GET':
         form.username.data = request.args.get('username')
@@ -52,14 +58,14 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            return redirect(next_page) if next_page else redirect(url_for('index'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
@@ -76,7 +82,7 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
-        flash('Your account has been updated!', 'success')
+        flash('업데이트 완료', 'success')
         return redirect(url_for('account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
@@ -87,7 +93,7 @@ def account():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('home'))
+    return redirect(url_for('index'))
 
 
 @app.route('/oauth')  # 코드 받기

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {% if title %}
+  <title>공통플랫폼담당 STEM - {{ title }}</title>
+  {% else %}
+  <title>공통플랫폼담당 STEM</title>
+  {% endif %}
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="{{url_for('static', filename='icon/favicon.png')}}">
+  <link href="{{url_for('static', filename='icon/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+    rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{{url_for('static', filename='lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{{url_for('static', filename='lib/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='lib/animate/animate.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+  <!-- =======================================================
+    Theme Name: BizPage
+    Theme URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container-fluid">
+      <div id="logo" class="pull-left">
+        <h1><a href="#intro" class="scrollto">공플담당 STEM</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="#intro"><img src="{{ url_for('static', filename='icon/GitHub-Mark-32px.png') }}" alt="" title="" /></a> -->
+      </div>
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#intro">홈</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">서비스 소개</a></li>
+          <li class="menu-has-children"><a class="nav-item nav-link" href="{{ url_for('index') }}">인싸되기</a>
+            <ul>
+              <li><a href="#">사용법(아직없어요)</a></li>
+              <li><a class="nav-item nav-link" href="{{ url_for('home') }}">구독 관리</a></li>
+              {% if current_user.is_authenticated %}
+              <li><a class="nav-item nav-link" href="{{ url_for('new_post') }}">구독 신청</a></li>
+              {% else %}
+              {% endif %}
+            </ul>
+          </li>
+          <li class="menu-has-children"><a class="nav-item nav-link" href="{{ url_for('index') }}">Youtube 댓글 분석</a>
+            <ul>
+              <li><a href="#">사용법(아직없어요)</a></li>
+              <li><a class="nav-item nav-link" href="{{ url_for('home') }}">결과보기</a></li>
+              {% if current_user.is_authenticated %}
+              <li><a class="nav-item nav-link" href="{{ url_for('new_youtube') }}">분석하기</a></li>
+              {% else %}
+              {% endif %}
+            </ul>
+          </li>
+          {% if current_user.is_authenticated %}
+          <a class="nav-item nav-link" href="{{ url_for('account') }}">{{ current_user.username }} 계정 관리</a>
+          <a class="nav-item nav-link" href="{{ url_for('logout') }}">로그아웃</a>
+          {% else %}
+          <a class="nav-item nav-link" href="{{ url_for('login') }}">로그인</a>
+          <!-- <a class="nav-item nav-link" href="{{ url_for('register') }}">사용자 등록</a> -->
+          <a class="nav-item nav-link" href="{{ url_for('subscribe') }}">사용자등록</a>
+          {% endif %}
+          <a class="nav-item nav-link" href="https://github.com/nyschoi/navercafe_crawler">
+            <img src="{{ url_for('static', filename='icon/GitHub-Mark-Light-32px.png') }}" alt="">
+          </a>
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro">
+    <div class="intro-container">
+      <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators"></ol>
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active">
+            <!-- <div class="carousel-background"><img src="img/intro-carousel/1.jpg" alt=""></div> -->
+            <div class="carousel-background">
+              <img src="{{url_for('static', filename='img/intro-carousel/kt_5g.jpg')}}" alt="">
+            </div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>공플담당</h2>
+                <p>STEM하느라 열공중</p>
+                <a class="btn-get-started scrollto" href="{{ url_for('subscribe') }}">시작하기!</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-background">
+              <img src="{{url_for('static', filename='img/intro-carousel/1.jpg')}}" alt="">
+            </div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>공플담당</h2>
+                <p>STEM하느라 열공중</p>
+                <a class="btn-get-started scrollto" href="{{ url_for('subscribe') }}">시작하기!</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-background">
+              <img src="{{url_for('static', filename='img/intro-carousel/2.jpg')}}" alt="">
+            </div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>공플담당</h2>
+                <p>STEM하느라 열공중</p>
+                <a class="btn-get-started scrollto" href="{{ url_for('subscribe') }}">시작하기!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- #intro -->
+
+  <main id="main">
+    <!--==========================
+      About Us Section
+    ============================-->
+    <section id="about">
+      <div class="container">
+        <header class="section-header">
+          <h3>About Us</h3>
+          <p>공플 담당의 차장으로 구성된 조입니다.</p>
+        </header>
+        <div class="row about-cols">
+          <div class="col-md-4 wow fadeInUp">
+            <div class="about-col">
+              <div class="img">
+                <img src="{{ url_for('static', filename='img/about-mission.jpg')}}" alt="" class="img-fluid">
+                <!-- <div class="icon"><i class="ion-ios-speedometer-outline"></i></div> -->
+              </div>
+              <h2 class="title"><a href="#">우리의 미션</a></h2>
+              <p> 뭐라도 만들자! </p>
+            </div>
+          </div>
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="about-col">
+              <div class="img">
+                <!-- <img src="{{ url_for('static', filename='img/about-plan.jpg')}}" alt="" class="img-fluid"> -->
+                <img src="{{ url_for('static', filename='img/new_skills.jpg')}}" alt="" class="img-fluid">
+                <!-- <div class="icon"><i class="ion-ios-list-outline"></i></div> -->
+              </div>
+              <h2 class="title"><a href="#">원래 계획은</a></h2>
+              <p> Python을 배워서 업무 자동화도 하고, AI도 하고, 앱도 만들어서 돈도 벌어보고... </p>
+            </div>
+          </div>
+
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="about-col">
+              <div class="img">
+                <!-- <img src="{{ url_for('static', filename='img/about-vision.jpg')}}" alt="" class="img-fluid"> -->
+                <img src="{{ url_for('static', filename='img/틀렷어 이제 꿈이고 희망이고 없어.jpg')}}" alt=""
+                  class="img-fluid">
+                <!-- <div class="icon"><i class="ion-ios-eye-outline"></i></div> -->
+              </div>
+              <h2 class="title"><a href="#">현실은</a></h2>
+              <p>
+                어찌됐든 만들었어요.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- #about -->
+
+    <!--==========================
+      Facts Section
+    ============================-->
+    <section id="facts" class="wow fadeIn">
+      <div class="container">
+        <header class="section-header">
+          <h3>Facts</h3>
+        </header>
+        <div class="row counters">
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">2</span>
+            <p>Projects</p>
+          </div>
+          <!-- <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">4</span>
+            <p>조</p>
+          </div> -->
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">1,364</span>
+            <p>개인 시간 투자!</p>
+          </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">13</span>
+            <p>열심히 하는 사람</p>
+          </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">1</span>
+            <p>그리고 김범석</p>
+          </div>
+        </div>
+        <!-- <div class="facts-img">
+          <img src="{{ url_for('static', filename='img/facts-img.png')}}" alt="" class="img-fluid">
+        </div> -->
+      </div>
+    </section><!-- #facts -->
+
+    <!--==========================
+      Team Section
+    ============================-->
+    <section id="team">
+      <div class="container">
+        <div class="section-header wow fadeInUp">
+          <h3>STEM 멤버</h3>
+          <p>공플 담당 차장급으로 구성되어 있습니다.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 wow fadeInUp">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10117304.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>조은진</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10032801.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>정유성</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10016592.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>최영수</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10057750.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>손득현</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10057832.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>최재호</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10058146.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>문종필</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10060720.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>최동욱</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10082410.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>유상원</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10086982.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>안희정</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10097179.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>박용주</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10110149.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>표광준</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10137958.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>안호태</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/10144157.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>조소영</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/200100951_1.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>김범석</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/유인나.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>You wake up</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/소혜.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>소혜</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </section><!-- #team -->
+
+    <!--==========================
+      Services Section
+    ============================-->
+    <section id="services">
+      <div class="container">
+        <header class="section-header wow fadeInUp">
+          <h3>서비스 소개</h3>
+          <p>제공하는 서비스 설명을 넣습니다.</p>
+        </header>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
+            <h4 class="title"><a href="">Youtube 댓글 분석</a></h4>
+            <p class="description">KT와 타사의 Youtube에 올라간 광고 댓글을 보고 고객의 관심사, 반응을 분석하는 서비스.</p>
+            <p class="description">만드는 김에 어떠한 Youtube 댓글도 분석할 수 있게
+              만들었습니다.</p>
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-people-outline"></i></div>
+            <h4 class="title"><a href="">인싸되기</a></h4>
+            <p class="description">관심있는 네이버 카페 Top 조회/댓글 게시글을 카톡으로 받아 보고 유행을 따라가자!</p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- #services -->
+  </main>
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=BizPage
+        -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
+
+  <!-- JavaScript Libraries -->
+  <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/jquery/jquery-migrate.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/easing/easing.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/superfish/hoverIntent.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/superfish/superfish.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/wow/wow.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/isotope/isotope.pkgd.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/lightbox/js/lightbox.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='lib/touchSwipe/jquery.touchSwipe.min.js')}}"></script>
+  <!-- Template Main Javascript File -->
+  <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+
+</body>
+
+</html>

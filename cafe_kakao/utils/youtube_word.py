@@ -155,7 +155,7 @@ import numpy as np
 def build_wourdcloud(word_ranking, mask_file, save_file):
     # cys
     # font_path = 'C:/STEM/malgun.ttf'
-    font_path = './cafe_kakao/static/AppleGothic.ttf'
+    font_path = './cafe_kakao/static/wordcloud_src/AppleGothic.ttf'
     # img_mask = np.array(Image.open('C:/STEM/' + mask_file))
     # img_mask = np.array(Image.open('./' + mask_file))
 
@@ -203,7 +203,7 @@ def test(you_urls):
     # img_file_name = './cafe_kakao/wordcloud/' + 'comment-' + now + '.png'
     cmt_file_name = 'comment-' + now + '.txt'
     img_file_name = 'comment-' + now + '.png'
-    build_wourdcloud(keywords, './cafe_kakao/static/alice_mask.png',
+    build_wourdcloud(keywords, './cafe_kakao/static/wordcloud_src/alice_mask.png',
                      './cafe_kakao/static/wordcloud/' + img_file_name)
     with open('./cafe_kakao/static/wordcloud/' + cmt_file_name, 'w') as f:
         for item in cmt_list:
