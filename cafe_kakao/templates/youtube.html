@@ -4,41 +4,41 @@
 <article class="media content-section">
     <div class="media-body">
         <div class="article-metadata">
-            <small class="text-muted">{{ post.author.username }}</small>
-            <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            <small class="text-muted">작성자: {{ post.author.username }}</small>
+            <div></div>
+            <small class="text-muted">게시일: {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
             {% if post.author == current_user %}
             <div>
                 <a class="btn btn-secondary btn-sm mt-1 mb-1"
-                    href="{{ url_for('update_youtube', post_id=post.id) }}">Update</a>
+                    href="{{ url_for('update_youtube', post_id=post.id) }}">수정</a>
                 <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal"
-                    data-target="#deleteModal">Delete</button>
+                    data-target="#deleteModal">삭제</button>
             </div>
             {% else %}
-            <div>
+            <!-- <div>
                 <h4 class="article-title">작성자가 아닙니다</h2>
-            </div>
+            </div> -->
             {% endif %}
         </div>
-        <div>
-            <h3 class="article-title">{{ post.title }}</h3>
-            <p class="article-content">Youtube URL: {{ post.youtube_url }}</p>
-            <!-- <img class="account-img" -->
-            <div class="wordcloud-wrapper">
-                <img src="{{url_for('static', filename='wordcloud/'+post.image_file, width=15, height=3)}}">
-            </div>
-            <p class="article-content">분석된 댓글 내용</p>
-            {% for comment in comments %}
-            <article class="media content-section">
-                <div class="media-body">
-                    <div class="article-metadata">
-                        <p><small class="text-muted">작성자:{{ comment.author }}</small></p>
-                        <!-- <p><small class="text-muted">댓글내용:{{ comment.contents }}</small></p> -->
-                        <p><small class="text-muted">댓글내용:{{comment}}</small></p>
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
+        <h2 class="article-title">{{ post.title }}</h2>
+        <p class="article-content">Youtube 주소: {{ post.youtube_url }}</p>
+        <div class="wordcloud-wrapper">
+            <img src="{{url_for('static', filename='wordcloud/'+post.image_file, width=15, height=3)}}">
         </div>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p class="article-content">댓글</p>
+        {% for comment in comments %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <p><small class="text-muted">작성자:{{ comment.author }}</small></p>
+                    <p><small class="text-muted">{{comment}}</small></p>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
     </div>
 </article>
 <!-- Modal -->
@@ -47,15 +47,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                <h5 class="modal-title" id="deleteModalLabel">삭제하시겠습니까?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
                 <form action="{{ url_for('delete_youtube', post_id=post.id) }}" method="POST">
-                    <input class="btn btn-danger" type="submit" value="Delete">
+                    <input class="btn btn-danger" type="submit" value="예">
                 </form>
             </div>
         </div>

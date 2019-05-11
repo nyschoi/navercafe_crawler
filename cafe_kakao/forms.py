@@ -67,6 +67,6 @@ class PostForm(FlaskForm):
 
 
 class YoutubeForm(FlaskForm):
-    title = StringField('제목(유튜브 제목이라도 넣어주세요)', validators=[DataRequired()])
-    youtube_url = StringField('유튜브 URL', validators=[DataRequired()])
+    title = StringField('제목', validators=[DataRequired()])
+    youtube_url = StringField('Youtube URL', validators=[DataRequired()])
     submit = SubmitField('완료')

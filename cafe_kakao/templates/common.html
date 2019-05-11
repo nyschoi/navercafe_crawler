@@ -62,7 +62,7 @@
           <li class="menu-has-children"><a class="nav-item nav-link" href="{{ url_for('index') }}">인싸되기</a>
             <ul>
               <li><a href="#">사용법(아직없어요)</a></li>
-              <li><a class="nav-item nav-link" href="{{ url_for('home') }}">구독 현황</a></li>
+              <li><a class="nav-item nav-link" href="{{ url_for('listpost') }}">구독 현황</a></li>
               {% if current_user.is_authenticated %}
               <li><a class="nav-item nav-link" href="{{ url_for('new_post') }}">구독 신청</a></li>
               {% else %}

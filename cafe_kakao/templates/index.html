@@ -61,7 +61,7 @@
           <li class="menu-has-children"><a class="nav-item nav-link" href="{{ url_for('index') }}">인싸되기</a>
             <ul>
               <li><a href="#">사용법(아직없어요)</a></li>
-              <li><a class="nav-item nav-link" href="{{ url_for('home') }}">구독 관리</a></li>
+              <li><a class="nav-item nav-link" href="{{ url_for('listpost') }}">구독 관리</a></li>
               {% if current_user.is_authenticated %}
               <li><a class="nav-item nav-link" href="{{ url_for('new_post') }}">구독 신청</a></li>
               {% else %}
@@ -71,7 +71,7 @@
           <li class="menu-has-children"><a class="nav-item nav-link" href="{{ url_for('index') }}">Youtube 댓글 분석</a>
             <ul>
               <li><a href="#">사용법(아직없어요)</a></li>
-              <li><a class="nav-item nav-link" href="{{ url_for('home') }}">결과보기</a></li>
+              <li><a class="nav-item nav-link" href="{{ url_for('listyoutube') }}">결과보기</a></li>
               {% if current_user.is_authenticated %}
               <li><a class="nav-item nav-link" href="{{ url_for('new_youtube') }}">분석하기</a></li>
               {% else %}
@@ -181,7 +181,18 @@
                 <img src="{{ url_for('static', filename='img/new_skills.jpg')}}" alt="" class="img-fluid">
                 <!-- <div class="icon"><i class="ion-ios-list-outline"></i></div> -->
               </div>
-              <h2 class="title"><a href="#">원래 계획은</a></h2>
+              <h2 class="title"><a href="#">기대했던 모습</a></h2>
+              <p> Python을 배워서 업무 자동화도 하고, AI도 하고, 앱도 만들어서 돈도 벌어보고... </p>
+            </div>
+          </div>
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="about-col">
+              <div class="img">
+                <!-- <img src="{{ url_for('static', filename='img/about-plan.jpg')}}" alt="" class="img-fluid"> -->
+                <img src="{{ url_for('static', filename='img/아무것도몰라요.jpg')}}" alt="" class="img-fluid">
+                <!-- <div class="icon"><i class="ion-ios-list-outline"></i></div> -->
+              </div>
+              <h2 class="title"><a href="#">현실</a></h2>
               <p> Python을 배워서 업무 자동화도 하고, AI도 하고, 앱도 만들어서 돈도 벌어보고... </p>
             </div>
           </div>
@@ -371,23 +382,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="member">
-              <img src="{{ url_for('static', filename='img/people/10082410.jpg')}}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>유상원</h4>
-                  <span>조장</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="member">
               <img src="{{ url_for('static', filename='img/people/10086982.jpg')}}" class="img-fluid" alt="">
@@ -458,6 +453,40 @@
           </div>
           <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="member">
+              <img src="{{ url_for('static', filename='img/people/유인나.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>You wake up</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{{ url_for('static', filename='img/people/소혜.jpg')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>소혜</h4>
+                  <span>조장</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="member">
               <img src="{{ url_for('static', filename='img/people/10144157.jpg')}}" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
@@ -492,27 +521,10 @@
           </div>
           <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="member">
-              <img src="{{ url_for('static', filename='img/people/유인나.jpg')}}" class="img-fluid" alt="">
+              <img src="{{ url_for('static', filename='img/people/10082410.jpg')}}" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>You wake up</h4>
-                  <span>조장</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="member">
-              <img src="{{ url_for('static', filename='img/people/소혜.jpg')}}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>소혜</h4>
+                  <h4>유상원</h4>
                   <span>조장</span>
                   <div class="social">
                     <a href=""><i class="fa fa-twitter"></i></a>
