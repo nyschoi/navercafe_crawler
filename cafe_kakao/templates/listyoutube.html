@@ -1,6 +1,6 @@
 {% extends "common.html" %}
 {% block content %}
-{% for post in posts %}
+{% for post in posts |sort(attribute='date_posted', reverse = True)%}
 <article class="media content-section">
   <div class="media-body">
     <h3>
